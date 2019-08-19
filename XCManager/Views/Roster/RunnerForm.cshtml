@@ -1,0 +1,43 @@
+﻿@model XCManager.Models.Runner
+@{
+    /**/
+
+    ViewBag.Title = "Edit";
+}
+<link type="text/css" rel="stylesheet" href="~/Content/RunnerForm.css"/>
+<h2>Runner Form</h2>
+
+
+    @using (Html.BeginForm("Save", "Roster", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(r => r.Name)
+            @Html.TextBoxFor(r => r.Name, new {id = "Name", @class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(r => r.Grade)
+            @Html.TextBoxFor(r => r.Grade, new {id = "Grade", @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(r => r.Email)
+            @Html.TextBoxFor(r => r.Email, new {id = "Email", @class = "form-control" })
+        </div>
+        <div class="text-center">
+            @Html.HiddenFor(r => r.Id)
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    }
+
+@section scripts
+{
+    <script>
+        
+    </script>    
+}
+
+
+
+
+
