@@ -8,15 +8,57 @@ namespace XCManager.Models
 {
     public class Runner
     {
-        public int Id { get; set; }
+        private string _phonenumber;
+        private string _email;
+
+        public int? Id { get; set; }
 
         [Required]
+        [StringLength(maximumLength: 40, ErrorMessage = "Name length must not exceed 40 characters")]
         public string Name { get; set; }
 
         [Required]
+        [RegularExpression(@"([0-9]{2})", ErrorMessage = "Not a valid grade")]
         public byte Grade { get; set; }
 
-        [Required]
-        public string Email { get; set; }
+        [Display(Name = "Email*")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Email length must not exceed 50 characters")]
+        [DataType(DataType.EmailAddress)]
+        public string Email
+        {
+            get
+            {
+                if (_email == null || _email == "")
+                    return "N/A";
+                else
+                    return _email;
+            }
+            set
+            {
+                _email = value;
+            }
+        }
+
+        [Display(Name = "Phone Number*")]
+        [DataType(DataType.PhoneNumber)]
+        [StringLength(maximumLength: 14, ErrorMessage = "Phone number must not exceed 14 characters")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        public string PhoneNumber
+        {
+            get
+            {
+                if (_phonenumber == null)
+                    return "N/A";
+                else
+                    return _phonenumber;
+            }
+            set
+            {
+                _phonenumber = value;
+            }
+        }
+
+        public Team Team { get; set; }
+
     }
 }

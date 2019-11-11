@@ -1,0 +1,39 @@
+﻿@model IEnumerable<XCManager.Models.Race>
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/Schedule.css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+<h2>Race Schedule</h2>
+@if (Model.Count() == 0)
+{
+    <h3>Uh Oh!</h3>
+    <p>Your schedule is empty! click the button below to start adding races.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Race Name</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Race in Model)
+            {
+                <tr>
+                    <td>@Race.RaceName</td>
+                    <td>@Race.Date.ToShortDateString()</td>
+                    <td>@Html.ActionLink("Create Race Report", "ReportForm", "Schedule", new { id = Race.Id }, null) | @Html.ActionLink("Download Race Report", "DownloadReport", "Schedule", new { id = Race.Id }, null) | @Html.ActionLink("Delete", "DeleteRace", "Schedule", new {id = Race.Id }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@Html.ActionLink("New Race", "NewRaceForm", "Schedule", new { @class = "btn btn-primary" })
+

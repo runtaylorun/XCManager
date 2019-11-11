@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using XCManager.Models;
 
 namespace XCManager.Controllers.API
@@ -11,16 +16,19 @@ namespace XCManager.Controllers.API
     public class RunnersController : ApiController
     {
         private ApplicationDbContext _context;
+        private UserManager<ApplicationUser> UserManager { get; set; }
 
         public RunnersController()
         {
             _context = new ApplicationDbContext();
+            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
         }
 
         //GET api/Runners
-        public IHttpActionResult GetRunners()
+        public async Task<IHttpActionResult> GetRunners()
         {
-            var runners = _context.Runners.ToList();
+            var user = await UserManager.FindByNameAsync(User.Identity.GetUserName());
+            var runners = _context.Runners.Select(r => r.Team.Id == user.Team.Id).ToList();
 
             return Ok(runners);
         }

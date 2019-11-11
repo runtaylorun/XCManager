@@ -1,0 +1,16 @@
+﻿*  {
+    text-align: center;
+    font-family: Roboto, sans-serif;
+    color: black;
+}
+th {
+    text-align: center;
+}
+
+b {
+    color: #f2efe8;
+}
+
+table td, th {
+    font-size: 17px;
+}

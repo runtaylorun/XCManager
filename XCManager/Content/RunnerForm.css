@@ -1,12 +1,27 @@
 ﻿form {
     margin: 0 auto;
     width: 300px;
+    color: black;
+    font-family: Roboto, sans-serif;
 }
 
 h2 {
     text-align: center;
+    color: black;
 }
 
-button {
-    margin: 0 auto;
+span {
+    color: #b94a48;
 }
+
+.modal-body {
+    background-color: #362D3A;
+}
+
+.form-control {
+    transition: border, 0.3s;
+}
+
+    .form-control:hover {
+        border: 2px solid #2380BE;
+    }

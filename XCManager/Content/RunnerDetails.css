@@ -1,12 +1,43 @@
-﻿h2 {
+﻿* {
+    font-family: Roboto, sans-serif;
+}
+
+body {
+    color: black;
+}
+
+h2 {
     text-align: center;
 }
 
 .panel {
     margin: 20px;
+    color: #f2efe8;
+    background-color: #F2EFE8;
+}
+
+.panel-body {
+    background-color: #2687ff;
+}
+
+p {
+    font-size: 16px;
+    text-align: center;
 }
 
 h3 {
-    font-size: 15px;
     text-align: center;
+    font-weight: bold;
+}
+
+#RaceHistory p {
+    font-size: 20px;
+}
+
+#personalBests p {
+    text-align: center;
+}
+
+#BigPanel {
+    border: none;
 }

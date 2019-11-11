@@ -26,3 +26,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+ul.nav li.dropdown:hover ul.dropdown-menu {
+    display: block;
+    text-align: center;
+}

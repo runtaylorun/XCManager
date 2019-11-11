@@ -1,8 +1,43 @@
-﻿table td, th {
-    text-align: center;
-    font-size: 20px;
+﻿* {
+    font-family: Roboto, sans-serif;
+    color: black;
 }
+
+table td, th {
+    text-align: center;
+    font-size: 17px;
+}
+
+
+.modal-footer .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: background-color, border-color, 0.3s;
+}
+b {
+    color: #F2EFE8;
+}
+
+    .modal-footer .btn-primary:hover {
+        background-color: #218c3a;
+        border-color: #218c3a;
+    }
+
+.modal-footer .btn-default {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    transition: background-color, border-color, 0.3s;
+}
+
+    .modal-footer .btn-default:hover {
+        background-color: #cc2333;
+        border-color: #cc2333;
+    }
 
 h2 {
     text-align: center;
+}
+
+body {
+    color: #F3F0F0;
 }

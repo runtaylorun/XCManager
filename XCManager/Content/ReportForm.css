@@ -1,0 +1,20 @@
+﻿* {
+    color: white;
+    font-family: Roboto, sans-serif;
+}
+
+h2 {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    font-size: 22px;
+}
+td input
+{
+    margin: 0 auto;
+}
+th {
+    text-align: center;
+}

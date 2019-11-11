@@ -180,11 +180,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Classes\ApplicationUserStore.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\RunnersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RosterController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Excel\Excel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,11 +203,86 @@
     <Compile Include="Migrations\201908131450507_PopulateRunners.Designer.cs">
       <DependentUpon>201908131450507_PopulateRunners.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908241228527_AddPhonenumberToRunner.cs" />
+    <Compile Include="Migrations\201908241228527_AddPhonenumberToRunner.Designer.cs">
+      <DependentUpon>201908241228527_AddPhonenumberToRunner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908241229243_PopulatePhoneNumbers.cs" />
+    <Compile Include="Migrations\201908241229243_PopulatePhoneNumbers.Designer.cs">
+      <DependentUpon>201908241229243_PopulatePhoneNumbers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908270105032_CreateRaceModel.cs" />
+    <Compile Include="Migrations\201908270105032_CreateRaceModel.Designer.cs">
+      <DependentUpon>201908270105032_CreateRaceModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908270111544_newRaceModel.cs" />
+    <Compile Include="Migrations\201908270111544_newRaceModel.Designer.cs">
+      <DependentUpon>201908270111544_newRaceModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908270113190_PopulateRaces.cs" />
+    <Compile Include="Migrations\201908270113190_PopulateRaces.Designer.cs">
+      <DependentUpon>201908270113190_PopulateRaces.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908311905267_CreateTeams.cs" />
+    <Compile Include="Migrations\201908311905267_CreateTeams.Designer.cs">
+      <DependentUpon>201908311905267_CreateTeams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910220038039_addRaceReportTable.cs" />
+    <Compile Include="Migrations\201910220038039_addRaceReportTable.Designer.cs">
+      <DependentUpon>201910220038039_addRaceReportTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910262249491_AddRaceIdToReportBinary.cs" />
+    <Compile Include="Migrations\201910262249491_AddRaceIdToReportBinary.Designer.cs">
+      <DependentUpon>201910262249491_AddRaceIdToReportBinary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910272251048_AddIndividualResults.cs" />
+    <Compile Include="Migrations\201910272251048_AddIndividualResults.Designer.cs">
+      <DependentUpon>201910272251048_AddIndividualResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910272341195_AddTeamToIndividualResult.cs" />
+    <Compile Include="Migrations\201910272341195_AddTeamToIndividualResult.Designer.cs">
+      <DependentUpon>201910272341195_AddTeamToIndividualResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910272347163_AddRaceToIndividualResult.cs" />
+    <Compile Include="Migrations\201910272347163_AddRaceToIndividualResult.Designer.cs">
+      <DependentUpon>201910272347163_AddRaceToIndividualResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911041520116_AddTeamToUser.cs" />
+    <Compile Include="Migrations\201911041520116_AddTeamToUser.Designer.cs">
+      <DependentUpon>201911041520116_AddTeamToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911050249231_AddTeamToRunnerModel.cs" />
+    <Compile Include="Migrations\201911050249231_AddTeamToRunnerModel.Designer.cs">
+      <DependentUpon>201911050249231_AddTeamToRunnerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911062255120_AddTeamToRaceModel.cs" />
+    <Compile Include="Migrations\201911062255120_AddTeamToRaceModel.Designer.cs">
+      <DependentUpon>201911062255120_AddTeamToRaceModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911110051443_UpdateRunnerAnnotations.cs" />
+    <Compile Include="Migrations\201911110051443_UpdateRunnerAnnotations.Designer.cs">
+      <DependentUpon>201911110051443_UpdateRunnerAnnotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911110208109_MakeTeamAndRunnerIdNullable.cs" />
+    <Compile Include="Migrations\201911110208109_MakeTeamAndRunnerIdNullable.Designer.cs">
+      <DependentUpon>201911110208109_MakeTeamAndRunnerIdNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911110251188_MadeRunnerEmailOptional.cs" />
+    <Compile Include="Migrations\201911110251188_MadeRunnerEmailOptional.Designer.cs">
+      <DependentUpon>201911110251188_MadeRunnerEmailOptional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IndividualResult.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Race.cs" />
+    <Compile Include="Models\RaceReport.cs" />
+    <Compile Include="Models\RaceReportBinary.cs" />
     <Compile Include="Models\Runner.cs" />
+    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\ViewModels\RosterViewModel.cs" />
+    <Compile Include="Models\ViewModels\RunnerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -213,9 +291,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Home.css" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\ReportForm.css" />
     <Content Include="Content\Roster.css" />
     <Content Include="Content\RunnerDetails.css" />
     <Content Include="Content\RunnerForm.css" />
+    <Content Include="Content\Schedule.css" />
     <Content Include="Content\United.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -281,9 +363,14 @@
     <Content Include="Views\Roster\Index.cshtml" />
     <Content Include="Views\Roster\RunnerForm.cshtml" />
     <Content Include="Views\Roster\RunnerDetails.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Schedule\ReportForm.cshtml" />
+    <Content Include="Views\Schedule\NewRaceForm.cshtml" />
+    <Content Include="Views\Account\NewTeamForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ExcelFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -308,6 +395,86 @@
     <EmbeddedResource Include="Migrations\201908131450507_PopulateRunners.resx">
       <DependentUpon>201908131450507_PopulateRunners.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908241228527_AddPhonenumberToRunner.resx">
+      <DependentUpon>201908241228527_AddPhonenumberToRunner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908241229243_PopulatePhoneNumbers.resx">
+      <DependentUpon>201908241229243_PopulatePhoneNumbers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908270105032_CreateRaceModel.resx">
+      <DependentUpon>201908270105032_CreateRaceModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908270111544_newRaceModel.resx">
+      <DependentUpon>201908270111544_newRaceModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908270113190_PopulateRaces.resx">
+      <DependentUpon>201908270113190_PopulateRaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908311905267_CreateTeams.resx">
+      <DependentUpon>201908311905267_CreateTeams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910220038039_addRaceReportTable.resx">
+      <DependentUpon>201910220038039_addRaceReportTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910262249491_AddRaceIdToReportBinary.resx">
+      <DependentUpon>201910262249491_AddRaceIdToReportBinary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910272251048_AddIndividualResults.resx">
+      <DependentUpon>201910272251048_AddIndividualResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910272341195_AddTeamToIndividualResult.resx">
+      <DependentUpon>201910272341195_AddTeamToIndividualResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910272347163_AddRaceToIndividualResult.resx">
+      <DependentUpon>201910272347163_AddRaceToIndividualResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911041520116_AddTeamToUser.resx">
+      <DependentUpon>201911041520116_AddTeamToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911050249231_AddTeamToRunnerModel.resx">
+      <DependentUpon>201911050249231_AddTeamToRunnerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911062255120_AddTeamToRaceModel.resx">
+      <DependentUpon>201911062255120_AddTeamToRaceModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911110051443_UpdateRunnerAnnotations.resx">
+      <DependentUpon>201911110051443_UpdateRunnerAnnotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911110208109_MakeTeamAndRunnerIdNullable.resx">
+      <DependentUpon>201911110208109_MakeTeamAndRunnerIdNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911110251188_MadeRunnerEmailOptional.resx">
+      <DependentUpon>201911110251188_MadeRunnerEmailOptional.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,37 +4,48 @@
 
     ViewBag.Title = "Edit";
 }
-<link type="text/css" rel="stylesheet" href="~/Content/RunnerForm.css"/>
+<link type="text/css" rel="stylesheet" href="~/Content/RunnerForm.css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 <h2>Runner Form</h2>
+<p>* = optional</p>
 
 
-    @using (Html.BeginForm("Save", "Roster", FormMethod.Post))
-    {
-        <div class="form-group">
-            @Html.LabelFor(r => r.Name)
-            @Html.TextBoxFor(r => r.Name, new {id = "Name", @class = "form-control"})
-        </div>
+@using (Html.BeginForm("Save", "Roster", FormMethod.Post))
+{
+    @Html.ValidationSummary(false, "", new {@class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(r => r.Name)
+        @Html.TextBoxFor(r => r.Name, new { id = "Name", @class = "form-control" })
+        @Html.ValidationMessageFor(r => r.Name)
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(r => r.Grade)
-            @Html.TextBoxFor(r => r.Grade, new {id = "Grade", @class = "form-control" })
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(r => r.Grade)
+        @Html.TextBoxFor(r => r.Grade, new { id = "Grade", @class = "form-control" })
+        @Html.ValidationMessageFor(r => r.Grade)
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(r => r.Email)
-            @Html.TextBoxFor(r => r.Email, new {id = "Email", @class = "form-control" })
-        </div>
-        <div class="text-center">
-            @Html.HiddenFor(r => r.Id)
-            <button class="btn btn-primary" type="submit">Submit</button>
-        </div>
-    }
+    <div class="form-group">
+        @Html.LabelFor(r => r.Email)
+        @Html.TextBoxFor(r => r.Email, new { id = "Email", @class = "form-control" })
+        @Html.ValidationMessageFor(r => r.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(r => r.PhoneNumber)
+        @Html.TextBoxFor(r => r.PhoneNumber, new { id = "Email", @class = "form-control" })
+        @Html.ValidationMessageFor(r => r.PhoneNumber)
+    </div>
+    <div class="text-center">
+        @Html.HiddenFor(r => r.Id)
+        @Html.HiddenFor(r => r.Team.Id)
+        <button class="btn btn-primary" type="submit">Submit</button>
+        @Html.ActionLink("Go Back", "Index", "Roster", new { @class = "btn btn-primary" })
+    </div>
+}
 
 @section scripts
 {
-    <script>
-        
-    </script>    
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
 

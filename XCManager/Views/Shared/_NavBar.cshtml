@@ -10,9 +10,17 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Roster", "Index", "Roster")</li>
-                <li>@Html.ActionLink("Team", "Contact", "Home")</li>
+                @if (User.IsInRole("BasicUser"))
+                {
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#">My Team<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Roster", "Index", "Roster")</li>
+                            <li>@Html.ActionLink("Schedule", "Index", "Schedule")</li>
+                        </ul>
+                    </li>
+                }
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

@@ -1,0 +1,38 @@
+﻿@model XCManager.Models.Race
+@{
+    /**/
+
+    ViewBag.Title = "NewRaceForm";
+}
+<link rel="stylesheet"  type="text/css" href="~/Content/RunnerForm.css" />
+<h2>New Race</h2>
+
+@using (Html.BeginForm("SaveRace", "Schedule", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(r => r.RaceName)
+        @Html.TextBoxFor(r => r.RaceName, new { id = "RaceName", @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(r => r.Date)
+        @Html.TextBoxFor(r => r.Date, new { id = "Date", @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(r => r.Distance)
+        @Html.TextBoxFor(r => r.Distance, new { id = "Distance", @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(r => r.Location)
+        @Html.TextBoxFor(r => r.Location, new { id = "Distance", @class = "form-control" })
+    </div>
+
+    <div class="text-center">
+        @Html.HiddenFor(r => r.Id)
+        <button class="btn btn-primary" type="submit">Submit</button>
+        @Html.ActionLink("Go Back", "Index", "Schedule", new { @class = "btn btn-primary" })
+    </div>
+}
+

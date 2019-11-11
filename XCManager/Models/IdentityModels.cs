@@ -16,15 +16,22 @@ namespace XCManager.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual Team Team { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Runner> Runners { get; set; }
+        public DbSet<Race> Races { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<RaceReportBinary> RaceReports { get; set; }
+        public DbSet<IndividualResult> IndividualResults { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         public static ApplicationDbContext Create()

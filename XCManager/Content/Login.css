@@ -1,0 +1,23 @@
+﻿body {
+}
+
+h2 {
+    color: black;
+    text-align: center;
+}
+#loginForm {
+    text-align: center;
+}
+
+#loginForm input {
+    margin: auto;
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+label {
+    text-align: center;
+}

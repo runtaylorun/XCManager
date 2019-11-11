@@ -1,0 +1,50 @@
+﻿* {
+    font-family: Roboto, sans-serif;
+    color: white;
+}
+h1 {
+    margin: 60px 0 60px 0;
+    width: 30%;
+    line-height: 60px;
+}
+
+#Landing p {
+    font-size: 18px;
+    letter-spacing: 0.4px;
+    width: 25%;
+    line-height: 25px;
+}
+
+.panel-body p {
+    text-align: center;
+    width: 75%;
+    font-size: 14px;
+    margin: 0 auto;
+    letter-spacing: 0.6px;
+    padding: 20px;
+}
+#Landing {
+    height: 100vh;
+    margin: 0;
+}
+
+body {
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('gallery_image.jpg');
+    background-size: cover;
+}
+
+.panel {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+.panel-heading {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    text-align: center;
+}
+.panel-body {
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+}

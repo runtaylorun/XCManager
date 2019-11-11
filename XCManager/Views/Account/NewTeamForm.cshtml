@@ -1,0 +1,27 @@
+﻿@model XCManager.Models.Team
+@{
+    /**/
+
+    ViewBag.Title = "NewTeamForm";
+}
+
+<h2>NewTeamForm</h2>
+@using (Html.BeginForm("CreateTeam", "Account", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(t => t.Name)
+        @Html.TextBoxFor(t => t.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Location)
+        @Html.TextBoxFor(t => t.Location, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.CoachName)
+        @Html.TextBoxFor(t => t.CoachName, new { @class = "form-control" })
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+}
+
