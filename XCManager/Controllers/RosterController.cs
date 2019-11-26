@@ -57,13 +57,6 @@ namespace XCManager.Controllers
         {
             if (!ModelState.IsValid)
             {
-                foreach (ModelState modelState in ViewData.ModelState.Values)
-                {
-                    foreach (ModelError error in modelState.Errors)
-                    {
-                        continue;
-                    }
-                }
                 return RedirectToAction("NewRunner", runner);
             }
             else
@@ -93,7 +86,7 @@ namespace XCManager.Controllers
             RunnerViewModel runner = new RunnerViewModel
             {
                 Runner = _context.Runners.SingleOrDefault(r => r.Id == id),
-                RecentResults = _context.IndividualResults.Include(r => r.Race).OrderByDescending(r => r.Race.Date).Where(r => r.runner.Id == id).Take(3).ToList(),
+                RecentResults = _context.IndividualResults.Include(r => r.Race).OrderByDescending(r => r.Race.Date).Where(r => r.Runner.Id == id).Take(3).ToList(),
                 PersonalBests = new Dictionary<string, TimeSpan>()
 
             };
@@ -102,14 +95,13 @@ namespace XCManager.Controllers
             {
                 var bestTime = (from a in _context.IndividualResults
                                 join c in _context.Races on a.Race.Id equals c.Id
-                                join d in _context.Runners on a.runner.Id equals d.Id
-                                where c.Distance == distance && a.runner.Id == id
-                                orderby a.finishingTime ascending
-                                select a.finishingTime).FirstOrDefault();
+                                join d in _context.Runners on a.Runner.Id equals d.Id
+                                where c.Distance == distance && a.Runner.Id == id
+                                orderby a.FinishingTime ascending
+                                select a.FinishingTime).FirstOrDefault();
 
                 runner.PersonalBests.Add(distance, bestTime);               
             }
-            
             
             return View(runner);
         }

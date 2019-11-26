@@ -73,7 +73,7 @@ namespace XCManager.Controllers
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            if(team.Id == 0)
+            if(team.Id == null)
             {
                 _context.Teams.Add(team);
                 var userInDb = _context.Users.SingleOrDefault(r => r.Id == user.Id);
@@ -81,7 +81,7 @@ namespace XCManager.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("TeamHome", "Home");
         }
 
         //
@@ -185,15 +185,15 @@ namespace XCManager.Controllers
 
                     await UserManager.AddToRoleAsync(user.Id, "BasicUser");
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                   // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("NewTeamForm");
+                    return View("ConfirmationSent");
                 }
                 AddErrors(result);
             }
@@ -479,7 +479,7 @@ namespace XCManager.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("TeamHome", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

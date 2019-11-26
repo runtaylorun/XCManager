@@ -11,6 +11,6 @@ namespace XCManager.Models
         public string FileName { get; set; }
         public char ContentType { get; set; }
         public byte[] Data { get; set; }
-        public int RaceId { get; set; }
+        public int? RaceId { get; set; }
     }
 }

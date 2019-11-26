@@ -12,6 +12,11 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using XCManager.Models;
 using XCManager.Classes;
+using SendGrid;
+using Microsoft.Web;
+using SendGrid.Helpers.Mail;
+using System.Net;
+using System.Configuration;
 
 namespace XCManager
 {
@@ -20,7 +25,23 @@ namespace XCManager
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return Execute(message);
+        }
+
+        static async Task Execute(IdentityMessage message)
+        {
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("taylormills190@gmail.com", "Taylor M");
+            var subject = "Test Message";
+            var to = new EmailAddress(message.Destination);
+            var plainTextContent = "";
+            var htmlContent = "<h1>Welcome to XCManager!</h1><br/>" + message.Body;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+          
+            var response = await client.SendEmailAsync(msg);
+
+            Task.WaitAll();
         }
     }
 

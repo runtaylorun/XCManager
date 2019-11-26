@@ -1,10 +1,13 @@
 ﻿@{
     ViewBag.Title = "Confirm Email";
 }
-
+<link href="~/Content/ConfirmedEmail.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 <h2>@ViewBag.Title.</h2>
 <div>
-    <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
+    <h1>You're all set!</h1>
+    <p>Your account has been successfully confirmed. Click the button below to login and get started!</p>
+    <div class="text-center">
+        @Html.ActionLink("Click Here", "Login", "Account", new { @class = "btn btn-primary" })
+    </div>
 </div>

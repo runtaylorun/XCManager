@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/ReportForm.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-<h2>@Model.race.RaceName Race Report</h2>
+<h2>@Model.Race.RaceName Race Report</h2>
 @using (Html.BeginForm("CreateReport", "Schedule", FormMethod.Post))
 {
     <table id="formTable" class="table table-bordered table-hover">
@@ -17,19 +17,19 @@
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < Model.results.Count(); i++)
+            @for (int i = 0; i < Model.Results.Count(); i++)
             {
                 <tr>
-                    <td>@Model.results[i].runner.Name</td>
-                    <td>@Html.TextBoxFor(r => r.results[i].finishingTime, new { @class = "form-control" })</td>
-                    <td>@Html.TextBoxFor(r => r.results[i].Place, new { @class = "form-control" })</td>
+                    <td>@Model.Results[i].Runner.Name</td>
+                    <td>@Html.TextBoxFor(r => r.Results[i].FinishingTime, new { @class = "form-control" })</td>
+                    <td>@Html.TextBoxFor(r => r.Results[i].Place, new { @class = "form-control" })</td>
                 </tr>
-                @Html.HiddenFor(r => r.results[i].runner.Id)
+                @Html.HiddenFor(r => r.Results[i].Runner.Id)
             }
         </tbody>
     </table>
     <div class="text-center">
-        @Html.HiddenFor(r => r.race.Id)
+        @Html.HiddenFor(r => r.Race.Id)
         <button type="submit" class="btn btn-primary">Create Report</button>
         @Html.ActionLink("Back", "Index", "Schedule", new { @class = "btn btn-primary" })
     </div>

@@ -45,17 +45,17 @@ namespace XCManager.Controllers
 
             var raceReport = new RaceReport
             {
-                results = new List<IndividualResult>(),
-                race = race
+                Results = new List<IndividualResult>(),
+                Race = race
             };
 
             foreach(Runner runner in runners)
             {
                 IndividualResult result = new IndividualResult
                 {
-                    runner = runner
+                    Runner = runner
                 };
-                raceReport.results.Add(result);
+                raceReport.Results.Add(result);
                 
             }
 
@@ -72,34 +72,34 @@ namespace XCManager.Controllers
         public ActionResult CreateReport(RaceReport Model)
         {
             RaceReport report = Model;
-            report.race = _context.Races.SingleOrDefault(r => r.Id == report.race.Id);
-            foreach(IndividualResult result in report.results)
+            report.Race = _context.Races.SingleOrDefault(r => r.Id == report.Race.Id);
+            foreach(IndividualResult result in report.Results)
             {
-                result.runner = _context.Runners.SingleOrDefault(r => r.Id == result.runner.Id);
-                result.Race = report.race;
+                result.Runner = _context.Runners.SingleOrDefault(r => r.Id == result.Runner.Id);
+                result.Race = report.Race;
                 _context.IndividualResults.Add(result);
             }
-            var dateString = report.race.Date.ToShortDateString();
+            var dateString = report.Race.Date.ToShortDateString();
 
             var path = Path.Combine(Server.MapPath("~/Content/ExcelFiles/"), 
-                report.race.RaceName + dateString.Replace('/', '-') + ".xlsx");
+                report.Race.RaceName + dateString.Replace('/', '-') + ".xlsx");
 
             ExcelDoc ex = new ExcelDoc();
             ex.CreateNewFile();
-            for(int i = 0; i < report.results.Count(); i++)
+            for(int i = 0; i < report.Results.Count(); i++)
             {
                 ex.WriteToCell(0, 0, "Name:");
-                ex.WriteToCell(i + 1, 0, report.results[i].runner.Name);
+                ex.WriteToCell(i + 1, 0, report.Results[i].Runner.Name);
             }
-            for (int i = 0; i < report.results.Count(); i++)
+            for (int i = 0; i < report.Results.Count(); i++)
             {
                 ex.WriteToCell(0, 1, "Time:");
-                ex.WriteToCell(i + 1, 1, report.results[i].finishingTime.ToString());
+                ex.WriteToCell(i + 1, 1, report.Results[i].FinishingTime.ToString());
             }
-            for (int i = 0; i < report.results.Count(); i++)
+            for (int i = 0; i < report.Results.Count(); i++)
             {
                 ex.WriteToCell(0, 2, "Place:");
-                ex.WriteToCell(i + 1, 2, report.results[i].Place.ToString());
+                ex.WriteToCell(i + 1, 2, report.Results[i].Place.ToString());
             }
             ex.SaveAs(path);
             ex.Close();
@@ -107,10 +107,10 @@ namespace XCManager.Controllers
             FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             BinaryReader reader = new BinaryReader(fs);
             RaceReportBinary binary = new RaceReportBinary();
-            binary.RaceId = report.race.Id;
+            binary.RaceId = report.Race.Id;
 
             binary.Data = reader.ReadBytes((Int32)fs.Length);
-            binary.FileName = report.race.RaceName + dateString.Replace('/', '-') + ".xlsx";
+            binary.FileName = report.Race.RaceName + dateString.Replace('/', '-') + ".xlsx";
 
             var reportInDb = _context.RaceReports.SingleOrDefault(r => r.FileName == binary.FileName);
 
@@ -155,14 +155,28 @@ namespace XCManager.Controllers
         [HttpPost]
         public async Task<ActionResult> SaveRace(Race race)
         {
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            race.Team = user.Team;
-            if (race.Id == 0)
-                _context.Races.Add(race);
+            if(!ModelState.IsValid)
+            {
+                foreach (ModelState modelState in ViewData.ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        continue;
+                    }
+                }
+                return RedirectToAction("NewRaceForm", race);
+            }
+            else
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                race.Team = user.Team;
+                if (race.Id == null || race.Id == 0)
+                    _context.Races.Add(race);
 
-            _context.SaveChanges();
+                _context.SaveChanges();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
         }
     }
 }

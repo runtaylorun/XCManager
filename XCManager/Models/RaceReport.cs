@@ -9,7 +9,7 @@ namespace XCManager.Models
     public class RaceReport
     {
         public int ReportId { get; set; }
-        public List<IndividualResult> results { get; set; }
-        public Race race { get; set; }
+        public List<IndividualResult> Results { get; set; }
+        public Race Race { get; set; }
     }
 }
