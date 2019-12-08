@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Threading.Tasks;
 using XCManager.Models;
+using XCManager.Models.ViewModels;
 
 namespace XCManager.Controllers
 {
@@ -43,12 +44,46 @@ namespace XCManager.Controllers
         [Authorize]
         public async Task<ActionResult> TeamHome()
         {
+            TeamHomeViewModel teamHomeViewModel;
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var teamRaceSchedule = _context.Races.Where(r => r.Team.Id == user.Team.Id).ToList();
+            var nextRace = CalculateNextRace(teamRaceSchedule);
+
             if (user.Team == null)
             {
                 return RedirectToAction("NewTeamForm", "Account");
             }
-            return View();
+            else
+            {
+                teamHomeViewModel = new TeamHomeViewModel()
+                {
+                    Team = _context.Teams.SingleOrDefault(t => t.Id == user.Team.Id),
+                    VarsityRunners = _context.Runners.Where(r => r.Team.Id == user.Team.Id).Take(7).ToList(),
+                    NextRace = nextRace
+                };
+            }
+            return View(teamHomeViewModel);
+        }
+
+        private Race CalculateNextRace(List<Race> teamRaceSchedule)
+        {
+            var currentDate = DateTime.Now;
+            var smallestDifference = teamRaceSchedule[0].Date.Subtract(currentDate);
+            var nextRace = teamRaceSchedule[0];
+
+
+            for(int i = 0; i < teamRaceSchedule.Count; i++)
+            {
+                var currentDifference = teamRaceSchedule[i].Date.Subtract(currentDate);
+
+                if(currentDifference.Ticks < smallestDifference.Ticks)
+                {
+                    smallestDifference = currentDifference;
+                    nextRace = teamRaceSchedule[i];
+                }
+            }
+
+            return nextRace;
         }
     }
 }

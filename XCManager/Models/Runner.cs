@@ -18,7 +18,7 @@ namespace XCManager.Models
         public string Name { get; set; }
 
         [Required]
-        [RegularExpression(@"([0-9]{2})", ErrorMessage = "Not a valid grade")]
+        [RegularExpression(@"([0-9]{1,2})", ErrorMessage = "Not a valid grade")]
         public byte Grade { get; set; }
 
         [Display(Name = "Email*")]
@@ -42,12 +42,11 @@ namespace XCManager.Models
         [Display(Name = "Phone Number*")]
         [DataType(DataType.PhoneNumber)]
         [StringLength(maximumLength: 14, ErrorMessage = "Phone number must not exceed 14 characters")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber
         {
             get
             {
-                if (_phonenumber == null)
+                if (_phonenumber == null || _phonenumber == "")
                     return "N/A";
                 else
                     return _phonenumber;

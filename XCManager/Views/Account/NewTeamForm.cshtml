@@ -6,7 +6,11 @@
 }
 
 <link href="~/Content/TeamForm.css" rel="stylesheet" />
-<h2>NewTeamForm</h2>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+<div class="text-center">
+    <h2>Looks like you dont have a team set up!</h2>
+    <p>Before you continue please fill out the following info to get things started.</p>
+</div>
 @using (Html.BeginForm("CreateTeam", "Account", FormMethod.Post))
 {
     <div class="form-group">

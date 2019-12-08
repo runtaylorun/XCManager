@@ -1,0 +1,23 @@
+﻿h2 {
+    color: black;
+    margin-bottom: 20px;
+}
+h3 {
+    text-align: center;
+}
+p {
+    text-align: center;
+    font-size: 16px;
+}
+
+#upcomingRaceTextDiv p
+{
+    font-size: 32px;
+    color: black;
+    display: inline;
+    margin: 20px 20px 0 20px;
+}
+
+#upcomingRaceTextDiv {
+    margin-top: 40px;
+}

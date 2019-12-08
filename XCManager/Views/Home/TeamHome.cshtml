@@ -1,7 +1,50 @@
-﻿
+﻿@model XCManager.Models.ViewModels.TeamHomeViewModel
 @{
     ViewBag.Title = "TeamHome";
 }
-
-<h2>TeamHome</h2>
+<link href="~/Content/TeamHome.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+<div class="text-center">
+    <h2>@Model.Team.Name Dashboard</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Varsity Runners</h3>
+                </div>
+                <div class="panel-body">
+                    @foreach (var runner in Model.VarsityRunners)
+                    {
+                        <p>@runner.Name @runner.Grade</p>
+                    }
+                   <div class="text-center">
+                        <span>[</span>@Html.ActionLink("Roster", "Index", "Roster")<span>]</span>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Team Info</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Coach: @Model.Team.CoachName</p>
+                    <p>Location: @Model.Team.Location</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="upcomingRaceTextDiv" class="text-center">
+                <p>Next Meet:</p>
+                <p>@Model.NextRace.RaceName</p>
+                <p>@Model.NextRace.Date.Subtract(DateTime.Now).Days days from now</p>
+            </div>
+        </div>
+    </div>
+</div>
 

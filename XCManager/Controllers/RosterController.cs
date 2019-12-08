@@ -9,6 +9,7 @@ using XCManager.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.Validation;
 
 namespace XCManager.Controllers
 {
@@ -74,7 +75,7 @@ namespace XCManager.Controllers
                     runnerToUpdate.Email = runner.Email;
                 }
 
-                _context.SaveChanges();
+                _context.SaveChanges();      
 
                 return RedirectToAction("Index");
             }

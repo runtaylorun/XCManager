@@ -1,4 +1,16 @@
 ﻿form {
-    margin: 0 auto;
+    margin: 0px auto;
     width: 300px;
+}
+p {
+    color: black;
+    text-align: center;
+}
+h2 {
+    color: black;
+    text-align: center;
+}
+div .text-center
+{
+    margin-bottom: 60px;
 }
