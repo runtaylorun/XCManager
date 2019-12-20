@@ -35,7 +35,7 @@
                     <h3>Personal Bests</h3>
                 </div>
                 <div id="personalBests" class="panel-body">
-                    @if (Model.PersonalBests.Count == 0)
+                    @if (Model.IsPersonalBestsEmpty)
                     {
                         <p>Could not find any personal bests.</p>
                     }
@@ -57,7 +57,7 @@
                     <h3>Recent Races</h3>
                 </div>
                 <div id="RaceHistory" class="panel-body">
-                    @if (Model.RecentResults.Count == 0)
+                    @if (Model.IsRecentResultsEmpty)
                     {
                         <p>Could not find any recent races.</p>
                     }

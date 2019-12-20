@@ -6,29 +6,27 @@ using System.Web.Mvc;
 using XCManager.Models;
 using Microsoft.Office.Interop.Excel;
 using XCManager.Excel;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System.IO;
+using XCManager.Services;
 
 namespace XCManager.Controllers
 {
     public class ScheduleController : Controller
     {
+        private readonly IUserServices _userService;
         private ApplicationDbContext _context;
-        private UserManager<ApplicationUser> UserManager { get; set; }
 
-        public ScheduleController()
+        public ScheduleController(IUserServices userService)
         {
             _context = new ApplicationDbContext();
-            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
+            _userService = userService;
         }
-        // GET: Schedule
+        
         [Authorize]
         public async Task<ActionResult> Index()
         {
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await _userService.GetUser();
             var races = _context.Races.OrderBy(r => r.Date).Where(r => r.Team.Id == user.Team.Id).ToList();
             return View(races);
         }
@@ -36,7 +34,7 @@ namespace XCManager.Controllers
         [Authorize]
         public async Task<ActionResult> ReportForm(int id)
         {
-            var user = await UserManager.FindByNameAsync(User.Identity.GetUserName());
+            var user = await _userService.GetUser();
             var runners = _context.Runners.Where(r => r.Team.Id == user.Team.Id).ToList();
             var race = _context.Races.SingleOrDefault(r => r.Id == id);
 
@@ -73,6 +71,7 @@ namespace XCManager.Controllers
         {
             RaceReport report = Model;
             report.Race = _context.Races.SingleOrDefault(r => r.Id == report.Race.Id);
+            CheckForPersonalBests(report);
             foreach(IndividualResult result in report.Results)
             {
                 result.Runner = _context.Runners.SingleOrDefault(r => r.Id == result.Runner.Id);
@@ -168,7 +167,7 @@ namespace XCManager.Controllers
             }
             else
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user = await _userService.GetUser();
                 race.Team = user.Team;
                 if (race.Id == null || race.Id == 0)
                     _context.Races.Add(race);
@@ -176,6 +175,18 @@ namespace XCManager.Controllers
                 _context.SaveChanges();
 
                 return RedirectToAction("Index");
+            }
+        }
+
+        private void CheckForPersonalBests(RaceReport report)
+        {
+            foreach(IndividualResult result in report.Results)
+            {
+                var currentRunner = _context.Runners.SingleOrDefault(r => r.Id == result.Runner.Id);
+                if(currentRunner.PersonalBest.Ticks < result.FinishingTime.Ticks)
+                {
+                    currentRunner.PersonalBest = result.FinishingTime;
+                }
             }
         }
     }

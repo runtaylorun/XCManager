@@ -58,6 +58,7 @@ namespace XCManager.Models
         }
 
         public Team Team { get; set; }
+        public TimeSpan PersonalBest { get; set; }
 
     }
 }

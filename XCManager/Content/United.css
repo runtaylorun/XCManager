@@ -6670,3 +6670,75 @@ button.close {
         color: white;
     }
 }
+
+.bracketsLink {
+    font-size: 90%;
+}
+.bracketsLink:before {
+    content: "[";
+    color: white;
+    padding-right: 2px;
+}
+
+.bracketsLink:after {
+    content: "]";
+    color: white;
+    padding-left: 2px;
+}
+
+li {
+    font-size: 120%;
+}
+
+textarea {
+    resize: none;
+}
+
+
+@media(max-width: 468px) {
+   .text-center > h1 {
+        font-size: 200%;
+    }
+
+   .panel-heading > h2 {
+       font-size: 150%;
+   }
+
+   .panel p {
+       font-size: 100%;
+   }
+
+   .nav a {
+       font-size: 75%;
+   }
+
+   #emptyGoalsLink {
+       font-size: 75%;
+   }
+
+   .text-center > p {
+       font-size: 100%;
+   }
+
+   .text-center > h3 {
+       font-size: 125%;
+   }
+
+   .container h2 {
+       font-size: 200%;
+   }
+
+   .text-center > .btn {
+       font-size: 75%;
+   }
+
+}
+
+@media(max-width: 768px)
+{
+    html {
+        font-size: 3px;
+    }
+}
+
+

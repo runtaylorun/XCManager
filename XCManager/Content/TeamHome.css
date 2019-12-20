@@ -1,23 +1,39 @@
-﻿h2 {
-    color: black;
-    margin-bottom: 20px;
-}
-h3 {
+﻿h1 {
     text-align: center;
+    font-size: 350%;
+    color: black;
+    margin: 50px 0 50px 0;
+}
+h2 {
+    text-align: center;
+    font-size: 250%;
 }
 p {
     text-align: center;
-    font-size: 16px;
+    font-size: 120%;
 }
 
-#upcomingRaceTextDiv p
+.panel-heading p
 {
-    font-size: 32px;
-    color: black;
-    display: inline;
-    margin: 20px 20px 0 20px;
+    margin-top: 15px;
 }
 
-#upcomingRaceTextDiv {
-    margin-top: 40px;
+ol {
+    text-align: center;
+}
+
+ol li {
+    margin-top: 15px;
+}
+
+#goalsPanel a {
+    display: inline;
+}
+
+#goalsPanel a + p {
+    display: inline;
+}
+
+#emptyGoalsLink {
+    font-size: 120%;
 }

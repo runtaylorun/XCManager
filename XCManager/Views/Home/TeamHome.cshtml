@@ -5,46 +5,137 @@
 <link href="~/Content/TeamHome.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 <div class="text-center">
-    <h2>@Model.Team.Name Dashboard</h2>
+    <h1>@Model.Team.Name Dashboard</h1>
 </div>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12 col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3>Varsity Runners</h3>
+                    <h2>Varsity Runners</h2>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <p>Name</p>
+                        </div>
+                        <div class="col-xs-4">
+                            <p>Grade</p>
+                        </div>
+                        <div class="col-xs-4">
+                            <p>Best 5K Time</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    @foreach (var runner in Model.VarsityRunners)
+                <div id="varsityRunnersPanel" class="panel-body">
+                    @if (Model.IsVarsityRunnersEmpty)
                     {
-                        <p>@runner.Name @runner.Grade</p>
+                        <div class="row">
+                            <div class="text-center">
+                                <p>Roster is empty</p>
+                            </div>
+                        </div>
                     }
-                   <div class="text-center">
-                        <span>[</span>@Html.ActionLink("Roster", "Index", "Roster")<span>]</span>
-                   </div>
+                    else
+                    {
+                        foreach (var runner in Model.VarsityRunners)
+                        {
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>@runner.Name</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>@runner.Grade</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    @if (runner.PersonalBest == TimeSpan.Zero)
+                                    {
+                                        <p>N/A</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@runner.PersonalBest.ToString(@"mm\:ss")</p>
+                                    }
+                                </div>
+                            </div>
+
+                        }
+                    }
+                    <div class="text-center">
+                        @Html.ActionLink("Roster", "Index", "Roster", new { @class = "bracketsLink" })
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="panel panel-default">
+        <div class="col-sm-12 col-sm-6">
+            <div id="goalsPanel" class="panel panel-default">
                 <div class="panel-heading">
-                    <h3>Team Info</h3>
+                    <h2>Goals</h2>
                 </div>
                 <div class="panel-body">
-                    <p>Coach: @Model.Team.CoachName</p>
-                    <p>Location: @Model.Team.Location</p>
+                    @if (Model.IsTeamGoalsEmpty)
+                    {
+                        <div class="text-center">
+                            <p>Looks like you havent set any goals yet!</p>
+                            @Html.ActionLink("Click here", "TeamGoalsForm", "Home", new {@id = "emptyGoalsLink"})<p> to get started</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <ol>
+                            @foreach (var goal in Model.TeamGoals)
+                            {
+                                <li>@goal.Text</li>
+                            }
+                        </ol>
+                        <div class="text-center">
+                            @Html.ActionLink("Edit Goals", "TeamGoalsForm", "Home", new { @class = "bracketsLink" })
+                        </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div id="upcomingRaceTextDiv" class="text-center">
-                <p>Next Meet:</p>
-                <p>@Model.NextRace.RaceName</p>
-                <p>@Model.NextRace.Date.Subtract(DateTime.Now).Days days from now</p>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Next Race</h2>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <p>Name</p>
+                        </div>
+                        <div class="col-xs-4">
+                            <p>Location</p>
+                        </div>
+                        <div class="col-xs-4">
+                            <p>Time until</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div id="upcomingRaceTextDiv" class="text-center">
+                        <div class="row">
+                            @if (Model.IsNextRaceEmpty)
+                            {
+                                <div class="text-center">
+                                    <p>No upcoming races</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-xs-4">
+                                    <p>@Model.NextRace.RaceName</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>@Model.NextRace.Location</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>@Model.DaysTillNextRace days</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-

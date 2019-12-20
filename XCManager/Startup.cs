@@ -10,5 +10,6 @@ namespace XCManager
         {
             ConfigureAuth(app);
         }
+
     }
 }

@@ -1,8 +1,11 @@
-﻿*  {
+﻿* {
     text-align: center;
-    font-family: Roboto, sans-serif;
     color: black;
 }
+.nav a:not(.dropdown.menu a) {
+    text-align: left;
+}
+
 th {
     text-align: center;
 }

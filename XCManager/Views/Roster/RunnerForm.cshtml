@@ -7,12 +7,12 @@
 <link type="text/css" rel="stylesheet" href="~/Content/RunnerForm.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 <h2>Runner Form</h2>
-<p>* = optional</p>
 
 
 @using (Html.BeginForm("Save", "Roster", FormMethod.Post))
 {
-    @Html.ValidationSummary(false, "", new {@class = "text-danger" })
+    <p>* = optional</p>
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(r => r.Name)
         @Html.TextBoxFor(r => r.Name, new { id = "Name", @class = "form-control" })

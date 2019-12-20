@@ -11,5 +11,15 @@ namespace XCManager.Models.ViewModels
         public Runner Runner { get; set; }
         public List<IndividualResult> RecentResults { get; set; }
         public Dictionary<String, TimeSpan> PersonalBests { get; set; }
+
+        public bool IsPersonalBestsEmpty
+        {
+            get { return PersonalBests.Count == 0; }
+        }
+
+        public bool IsRecentResultsEmpty
+        {
+            get { return RecentResults.Count == 0; }
+        }
     }
 }

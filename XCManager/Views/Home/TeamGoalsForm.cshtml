@@ -1,0 +1,24 @@
+﻿@model XCManager.Models.ViewModels.GoalFormViewModel
+@{
+    ViewBag.Title = "TeamGoalsForm";
+}
+<link href="~/Content/GoalsForm.css" rel="stylesheet" />
+<h2>Fill out your team's goals</h2>
+@using (Html.BeginForm("Save", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    for(int i = 0; i < 5; i++)
+    {
+        <div class="form-group">
+            <label>Goal number @(i + 1)</label>
+            @Html.TextAreaFor(g => g.Goals[i].Text, new {@class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(g => g.Goals[i].Text)
+            @Html.HiddenFor(g => g.Goals[i].Id)
+        </div>
+    }
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+        </div>
+}
+

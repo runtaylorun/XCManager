@@ -27,6 +27,7 @@ namespace XCManager.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<RaceReportBinary> RaceReports { get; set; }
         public DbSet<IndividualResult> IndividualResults { get; set; }
+        public DbSet<Goal> TeamGoals { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

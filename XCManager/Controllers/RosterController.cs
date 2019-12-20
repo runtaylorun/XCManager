@@ -6,31 +6,31 @@ using System.Web;
 using System.Web.Mvc;
 using XCManager.Models;
 using XCManager.Models.ViewModels;
-using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity.Validation;
+using XCManager.Services;
 
 namespace XCManager.Controllers
 {
     public class RosterController : Controller
     {
         private ApplicationDbContext _context;
-        private UserManager<ApplicationUser> UserManager { get; set; }
+        private readonly IUserServices _userService;
 
-        public RosterController()
+        public RosterController(IUserServices userService)
         {
             _context = new ApplicationDbContext();
-            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
+            _userService = userService;
         }
 
         public async Task<ActionResult> Index()
         {
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await _userService.GetUser();
+
             RosterViewModel runners = new RosterViewModel
             {
                 Runners = _context.Runners.Where(r => r.Team.Id == user.Team.Id).ToList()
             };
+
             return View(runners);
         }
 
@@ -62,10 +62,13 @@ namespace XCManager.Controllers
             }
             else
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                runner.Team = user.Team;
+                var user = await _userService.GetUser();
+
                 if (runner.Id == null || runner.Id == 0)
+                {
+                    runner.Team = user.Team;
                     _context.Runners.Add(runner);
+                }
                 else
                 {
                     var runnerToUpdate = _context.Runners.SingleOrDefault(r => r.Id == runner.Id);
@@ -91,7 +94,9 @@ namespace XCManager.Controllers
                 PersonalBests = new Dictionary<string, TimeSpan>()
 
             };
+
             var Distances = _context.Races.Select(r => r.Distance).Distinct().ToList();
+
             foreach(string distance in Distances)
             {
                 var bestTime = (from a in _context.IndividualResults

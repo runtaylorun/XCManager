@@ -5,7 +5,7 @@
 <link type="text/css" rel="stylesheet" href="~/Content/Roster.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 <h2>Roster</h2>
-@if (Model.Runners.Count == 0)
+@if (Model.IsRunnersListEmpty)
 {
 <div class="text-center">
     <h3>Uh Oh!</h3>

@@ -1,0 +1,10 @@
+﻿form {
+    margin: 0 auto;
+    width: 300px;
+    color: black;
+    font-family: Roboto, sans-serif;
+}
+h2 {
+    text-align: center;
+    color: black;
+}
