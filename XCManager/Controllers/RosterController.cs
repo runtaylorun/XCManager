@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using XCManager.Models;
 using XCManager.Models.ViewModels;
 using System.Threading.Tasks;
@@ -13,22 +8,18 @@ namespace XCManager.Controllers
 {
     public class RosterController : Controller
     {
-        private ApplicationDbContext _context;
-        private readonly IUserServices _userService;
+        private readonly IRunnerServices _runnerService;
 
-        public RosterController(IUserServices userService)
+        public RosterController(IRunnerServices runnerService)
         {
-            _context = new ApplicationDbContext();
-            _userService = userService;
+            _runnerService = runnerService;
         }
 
         public async Task<ActionResult> Index()
         {
-            var user = await _userService.GetUser();
-
             RosterViewModel runners = new RosterViewModel
             {
-                Runners = _context.Runners.Where(r => r.Team.Id == user.Team.Id).ToList()
+                Runners = await _runnerService.GetTeamRoster()
             };
 
             return View(runners);
@@ -41,16 +32,12 @@ namespace XCManager.Controllers
 
         public ActionResult UpdateRunner(int id)
         {
-            var runner = _context.Runners.SingleOrDefault(r => r.Id == id);
-            return View("RunnerForm", runner);
+            return View("RunnerForm", _runnerService.GetRunner(id));
         }
 
         public ActionResult DeleteRunner(int id)
         {
-            var runnerToDelete = _context.Runners.SingleOrDefault(r => r.Id == id);
-
-            _context.Runners.Remove(runnerToDelete);
-            _context.SaveChanges();
+            _runnerService.DeleteRunner(id);
             return RedirectToAction("Index");
         }
 
@@ -62,24 +49,7 @@ namespace XCManager.Controllers
             }
             else
             {
-                var user = await _userService.GetUser();
-
-                if (runner.Id == null || runner.Id == 0)
-                {
-                    runner.Team = user.Team;
-                    _context.Runners.Add(runner);
-                }
-                else
-                {
-                    var runnerToUpdate = _context.Runners.SingleOrDefault(r => r.Id == runner.Id);
-
-                    runnerToUpdate.Name = runner.Name;
-                    runnerToUpdate.Grade = runner.Grade;
-                    runnerToUpdate.Email = runner.Email;
-                }
-
-                _context.SaveChanges();      
-
+                await _runnerService.PostRunner(runner);
                 return RedirectToAction("Index");
             }
             
@@ -89,25 +59,10 @@ namespace XCManager.Controllers
         {
             RunnerViewModel runner = new RunnerViewModel
             {
-                Runner = _context.Runners.SingleOrDefault(r => r.Id == id),
-                RecentResults = _context.IndividualResults.Include(r => r.Race).OrderByDescending(r => r.Race.Date).Where(r => r.Runner.Id == id).Take(3).ToList(),
-                PersonalBests = new Dictionary<string, TimeSpan>()
-
+                Runner = _runnerService.GetRunner(id),
+                RecentResults = _runnerService.GetRunnersRecentResults(id),
+                PersonalBests = _runnerService.GetRunnersPersonalBests(id)
             };
-
-            var Distances = _context.Races.Select(r => r.Distance).Distinct().ToList();
-
-            foreach(string distance in Distances)
-            {
-                var bestTime = (from a in _context.IndividualResults
-                                join c in _context.Races on a.Race.Id equals c.Id
-                                join d in _context.Runners on a.Runner.Id equals d.Id
-                                where c.Distance == distance && a.Runner.Id == id
-                                orderby a.FinishingTime ascending
-                                select a.FinishingTime).FirstOrDefault();
-
-                runner.PersonalBests.Add(distance, bestTime);               
-            }
             
             return View(runner);
         }

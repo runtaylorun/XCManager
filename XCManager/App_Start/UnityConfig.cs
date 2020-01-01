@@ -16,6 +16,7 @@ namespace XCManager
             // register all your components with the container here
 
             container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<IRunnerServices, RunnerServices>();
             container.RegisterType<IUserServices, UserServices>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

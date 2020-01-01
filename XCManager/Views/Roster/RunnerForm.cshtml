@@ -37,7 +37,6 @@
     </div>
     <div class="text-center">
         @Html.HiddenFor(r => r.Id)
-        @Html.HiddenFor(r => r.Team.Id)
         <button class="btn btn-primary" type="submit">Submit</button>
         @Html.ActionLink("Go Back", "Index", "Roster", new { @class = "btn btn-primary" })
     </div>

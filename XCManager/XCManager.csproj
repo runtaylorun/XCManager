@@ -348,6 +348,7 @@
     <Compile Include="Models\ViewModels\TeamHomeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RaceReportServices.cs" />
+    <Compile Include="Services\RunnerService.cs" />
     <Compile Include="Services\UserServices.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
