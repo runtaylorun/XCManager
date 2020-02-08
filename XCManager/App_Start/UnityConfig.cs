@@ -18,6 +18,7 @@ namespace XCManager
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<IRunnerServices, RunnerServices>();
             container.RegisterType<IUserServices, UserServices>();
+            container.RegisterType<IRaceService, RaceService>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

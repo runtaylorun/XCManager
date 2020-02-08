@@ -23,7 +23,7 @@ namespace XCManager.Classes
         {
            
             return await Users.Include(r => r.Roles).Include(r => r.Claims).Include(r => r.Logins).FirstOrDefaultAsync(r => r.Id == userId);
-        }
+        } 
 
         
     }
