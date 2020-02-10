@@ -19,6 +19,7 @@ namespace XCManager
             container.RegisterType<IRunnerServices, RunnerServices>();
             container.RegisterType<IUserServices, UserServices>();
             container.RegisterType<IRaceService, RaceService>();
+            container.RegisterType<IRaceReportService, RaceReportServices>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

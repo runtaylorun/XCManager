@@ -29,7 +29,7 @@ else
                 <tr>
                     <td>@Race.RaceName</td>
                     <td>@Race.Date.ToShortDateString()</td>
-                    <td>@Html.ActionLink("Create Race Report", "ReportForm", "Schedule", new { id = Race.Id }, null) | @Html.ActionLink("Download Race Report", "DownloadReport", "Schedule", new { id = Race.Id }, null) | @Html.ActionLink("Delete", "DeleteRace", "Schedule", new {id = Race.Id }, null)</td>
+                    <td>@Html.ActionLink("Create Race Report", "ReportForm", "RaceReport", new { id = Race.Id }, null) | @Html.ActionLink("Download Race Report", "DownloadReport", "RaceReport", new { id = Race.Id }, null) | @Html.ActionLink("Delete", "DeleteRace", "Schedule", new {id = Race.Id }, null)</td>
                 </tr>
             }
         </tbody>

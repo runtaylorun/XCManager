@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="~/Content/ReportForm.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 <h2>@Model.Race.RaceName Race Report</h2>
-@using (Html.BeginForm("CreateReport", "Schedule", FormMethod.Post))
+@using (Html.BeginForm("CreateReport", "RaceReport", FormMethod.Post))
 {
     <table id="formTable" class="table table-bordered table-hover">
         <thead>

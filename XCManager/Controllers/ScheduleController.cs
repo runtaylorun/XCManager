@@ -20,7 +20,7 @@ namespace XCManager.Controllers
         [Authorize]
         public async Task<ActionResult> Index()
         {
-            IEnumerable<Race> races = await _raceService.GetRaces();
+            var races = await _raceService.GetRaces();
             return View(races);
         }
 

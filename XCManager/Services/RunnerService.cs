@@ -10,7 +10,7 @@ namespace XCManager.Services
 {
     public interface IRunnerServices
     {
-        Task<List<Runner>> GetTeamRoster();
+        Task<IEnumerable<Runner>> GetTeamRoster();
         Runner GetRunner(int id);
         void DeleteRunner(int id);
         Task PostRunner(Runner runner);
@@ -29,11 +29,11 @@ namespace XCManager.Services
             _userService = userService;
         }
 
-        public async Task<List<Runner>> GetTeamRoster()
+        public async Task<IEnumerable<Runner>> GetTeamRoster()
         {
             var user = await _userService.GetUser();
             var list = _context.Runners.Where(r => r.Team.Id == user.Team.Id).ToList();
-            return _context.Runners.Where(r => r.Team.Id == user.Team.Id).ToList();
+            return list;
         }
 
         public Runner GetRunner(int id)
