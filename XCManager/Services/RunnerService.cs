@@ -38,7 +38,7 @@ namespace XCManager.Services
 
         public Runner GetRunner(int id)
         {
-           return _context.Runners.SingleOrDefault(r => r.Id == id);
+           return _context.Runners.Include(r => r.Team).SingleOrDefault(r => r.Id == id);
         }
 
         public void DeleteRunner(int id)

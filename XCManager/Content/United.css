@@ -66,6 +66,7 @@ abbr[title] {
 b,
 strong {
   font-weight: bold;
+  color: white
 }
 dfn {
   font-style: italic;
@@ -2330,7 +2331,7 @@ th {
   background-color: #f9f9f9;
 }
 .table-hover > tbody > tr:hover {
-    background-color: #241e27;
+    
 }
 .table > thead > tr > td.active,
 .table > tbody > tr > td.active,

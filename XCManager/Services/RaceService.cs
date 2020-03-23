@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using XCManager.Models;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace XCManager.Services
         {
             return _context.Races.SingleOrDefault(r => r.Id == raceId);
         }
+
 
         public async Task SaveRace(Race race)
         {

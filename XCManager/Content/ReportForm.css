@@ -1,6 +1,10 @@
 ﻿* {
-    color: white;
+    color: black;
     font-family: Roboto, sans-serif;
+}
+
+table {
+    margin-top: 50px;
 }
 
 h2 {

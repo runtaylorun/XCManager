@@ -101,8 +101,6 @@ namespace XCManager.Controllers
         {
             TeamHomeViewModel teamHomeViewModel;
             var user = await _userService.GetUser();
-            var teamRaceSchedule = _context.Races.Where(r => r.Team.Id == user.Team.Id).ToList();
-            var nextRace = CalculateNextRace(teamRaceSchedule);
 
             if (user.Team == null)
             {
@@ -110,6 +108,8 @@ namespace XCManager.Controllers
             }
             else
             {
+                var teamRaceSchedule = _context.Races.Where(r => r.Team.Id == user.Team.Id).ToList();
+                var nextRace = CalculateNextRace(teamRaceSchedule);
                 teamHomeViewModel = new TeamHomeViewModel()
                 {
                     Team = _context.Teams.SingleOrDefault(t => t.Id == user.Team.Id),
